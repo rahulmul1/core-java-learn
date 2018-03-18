@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+    <description>OSGi Component Framework Tag Library</description>
+    <tlib-version>1.1</tlib-version>
+    <short-name>ims</short-name>
+    <uri>http://www.ims.com/taglibs/ims/1.1</uri>
+
+    <tag>
+        <description>This tag loads a controller class and makes it available in pageContext</description>
+        <name>controller</name>
+        <tag-class>com.ims.base.taghandler.ControllerTag</tag-class>
+        <tei-class>com.ims.base.taghandler.ControllerTEI</tei-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>cls</name>
+            <required>true</required>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Defines regularly used scripting variables</description>
+        <name>defineObjects</name>
+        <tag-class>com.ims.base.taghandler.DefineObjectsTag</tag-class>
+        <tei-class>com.ims.base.taghandler.DefineObjectsTEI</tei-class>
+        <body-content>empty</body-content>
+    </tag>
+
+</taglib>

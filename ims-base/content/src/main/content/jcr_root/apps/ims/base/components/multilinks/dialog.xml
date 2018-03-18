@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Dialog"
+    title=""
+    xtype="tabpanel">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <multilinksPanel
+            jcr:primaryType="cq:Widget"
+            title="Multi links panel"
+            xtype="panel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <pages
+                    jcr:primaryType="cq:Widget"
+                    fieldDescription="Click the '+' to add a new Link"
+                    fieldLabel="Links"
+                    name="./paths"
+                    xtype="multifield">
+                    <fieldConfig
+                        jcr:primaryType="cq:Widget"
+                        rootPath="{Path}/content"
+                        width="155"
+                        xtype="linkfield"/>
+                </pages>
+            </items>
+        </multilinksPanel>
+    </items>
+</jcr:root>

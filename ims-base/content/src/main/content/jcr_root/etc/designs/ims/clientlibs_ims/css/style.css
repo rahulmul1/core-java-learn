@@ -1,0 +1,54 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:auto; padding:!important;}
+html{ background:#FFF; font-family:Arial, Helvetica, sans-serif;}
+
+#wrapper {margin:auto; padding:auto; min-width:980px; height:auto; }
+
+#header{ margin:auto; padding:auto; min-width:100%;height:101px; background:url(/etc/designs/ims/images/header.png);  }
+
+#main_body{margin:auto; padding:inherit; width:100%;height:auto; background:#FFF; float:left; clear:both; }
+#footer{ margin:auto; padding:inherit; min-width:100%; height:50px; background:url(/etc/designs/ims/images/footer.png); border-style:solid; border-top:inset; border-top-width:thin; color:#2D2D2D; clear:both;}
+
+
+
+#header_wrapper{ margin:auto; padding:inherit;width:980px; height:75px; clear:both;}
+#body_wrapper{ width:980px; height:100%;  margin:auto; padding:inherit; clear:both;}
+#footer_wrapper{ margin:auto; padding:inherit; width:980px; height:50px; clear:both;}
+
+
+
+#body_wrapper_left{ width:640px; height:auto; float:left; clear:left; margin-top:10px; }
+#body_wrapper_right{width:330px; height:auto; margin-left:10px;  float:right; clear:right; margin-top:30px; padding:auto;}
+
+
+#login_thumbnail{margin:auto; width:330px; height:30px; padding-top:11px; padding-left:10px; background:url(/etc/designs/ims/images/login_thumb.png) no-repeat; color:#AAA;}
+#login_body{margin:auto; padding:inherit;width:330px; height:auto; background:url(/etc/designs/ims/images/login_body.png); margin-top:1px; clear:both;}
+
+#login_body_top{margin:auto;width:330px; height:10px; background:url(/etc/designs/ims/images/login_bodytop.png) no-repeat;}
+#login_body_center{margin:auto; padding:inherit;width:330px; height:auto; background:url(/etc/designs/ims/images/login_bodycntr.png) repeat;}
+#login_body_bottom{margin:auto; padding:inherit;width:330px; height:11px; background:url(/etc/designs/ims/images/login_bodybottom.png) no-repeat;}
+
+
+#logo{ width:auto; height:65px; float:left; clear:right; margin:5px; padding:auto; color:#0b92b4; font-size:24px; font-family:Verdana, Geneva, sans-serif; font-weight:bold;}
+#header_wrapper ul{ float:right; clear:right; width:auto; height:45px; margin:auto; padding:inherit; margin-top:30px;}
+#header_wrapper ul li{ width:auto; height:30px; margin-right:5px; float:left; text-align:center; text-decoration: none; display:block; list-style:none;color:#888;}
+
+#header_wrapper ul li a{ text-decoration:none; font-family:arial, helvetica, sans-serif; font-size:16px; color:#888;}
+
+#header_wrapper ul li a:hover{ color:#FFF;}
+
+
+
+
+
+
+#login_body table{ margin:auto; margin-left:40px; width:290px; clear:both;}
+#login_body table tr td{ padding-top:10px;font-family:arial, helvetica, sans-serif; font-size:16px; color:#888;}
+#login_body table tr td a{ text-decoration:none; text-align:left; color:#AAA;}
+#login_body table tr td a:hover{color:#FFF;}
+
+.text_box{ width:250px; height:30px; font-family:arial, helvetica, sans-serif; font-size:16px; color:#555;}
+
+.login_btn{ background:url(/etc/designs/ims/images/button.png) no-repeat; width:120px; height:40px; border:none; border-style:none; font-family:arial, helvetica, sans-serif; font-size:16px; color:#FFF; cursor:pointer;}
+
