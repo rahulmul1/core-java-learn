@@ -19,7 +19,7 @@ public class BufferInputStreamExample {
 	 */
 	public static void main(String[] args) {
 		try {
-			readBufferFile("H:/IMS PROJECT/Created Xmls/Employee.xml");
+			readBufferFile("files/Employee.xml");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,7 +39,10 @@ public class BufferInputStreamExample {
 		InputStream fis = null;
 		InputStream bis = null;
 		try {
-			File file = new File(filePath);
+			ClassLoader classLoader = new BufferInputStreamExample().getClass().getClassLoader();
+			String fileName = classLoader.getResource(filePath).getFile();
+			
+			File file = new File(fileName);
 			fis = new FileInputStream(file);
 			bis = new BufferedInputStream(fis);
 

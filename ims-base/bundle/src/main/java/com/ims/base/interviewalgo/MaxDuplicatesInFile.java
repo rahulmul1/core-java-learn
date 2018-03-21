@@ -26,8 +26,11 @@ public class MaxDuplicatesInFile {
 	}
 
 	private static void countMaxDuplicates() throws IOException {
-		File file = new File(
-				"H:/IMS PROJECT/Created Xmls/MaxDuplicatesInFile.txt");
+		ClassLoader classLoader = new DistinctWordFromFile().getClass().getClassLoader();
+		String fileName = classLoader.getResource("files/MaxDuplicatesInFile.txt").getFile();
+		
+		File file = new File(fileName);
+		
 		InputStream is = new FileInputStream(file);
 		BufferedInputStream bis = new BufferedInputStream(is);
 		try {

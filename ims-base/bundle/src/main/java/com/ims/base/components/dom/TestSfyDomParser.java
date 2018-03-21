@@ -17,7 +17,11 @@ public class TestSfyDomParser {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		File fileURL = new File("H:/IMS PROJECT/AU_DESIGN_1.xml");
+		ClassLoader classLoader = new TestSfyDomParser().getClass().getClassLoader();
+		String fileName = classLoader.getResource("files/AU_DESIGN_1.xml").getFile();
+		
+		File fileURL = new File(fileName);
+		
 		SfyDomParser sfyDomParser = new SfyDomParser();
 		try {
 			Country country = sfyDomParser.getBeanFromXML(fileURL);

@@ -1,5 +1,6 @@
 package com.ims.base.components.sfy;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -83,7 +84,8 @@ public class SfyStep2Servlet extends SlingAllMethodsServlet{
 	private Node getJsonNodeFromService(String countryCode , String design , SlingHttpServletRequest request){
 		/**this line will be used instead of the line below it*/
 		//String sfyxMlFileLocation = setForYouService.getSFYXMlFileLocation(countryCode, design, request.getResource());
-		String sfyxMlFileLocation = "H:/IMS PROJECT/AU_DESIGN_1.xml";
+		ClassLoader classLoader = new SfyStep2Servlet().getClass().getClassLoader();
+		String sfyxMlFileLocation = classLoader.getResource("files/AU_DESIGN_1.xml").getFile();
 		String jsonNodePath = createNodeForSFYService.createNodesForSFY(sfyxMlFileLocation);
 		return request.getResourceResolver().getResource(jsonNodePath).adaptTo(Node.class);
 	}

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.ArrayUtils;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class ListAllFilesFolders.
@@ -63,7 +65,11 @@ public class ListAllFilesFolders {
 		 * listFiles method internally calls the accept method of the anonymous
 		 * class which implements the FilenameFilter interface.
 		 */
-		List<File> xmlFileList = Arrays.asList(directory.listFiles(filenameFilter));
+		File[] exeFiles = directory.listFiles(filenameFilter);
+		List<File> xmlFileList = null;
+		if(!ArrayUtils.isEmpty(exeFiles)) {
+			xmlFileList = Arrays.asList(exeFiles);
+		}
 		return xmlFileList;
 	}
 	
@@ -76,13 +82,19 @@ public class ListAllFilesFolders {
 	public static void main(String[] args) {
 		List<File> fileFolderList = new ArrayList<>();
 		System.out.println("List All files and folder -");
-		listf("H:/IMS PROJECT/pkg",fileFolderList );
+		
+		ClassLoader classLoader = new ListAllFilesFolders().getClass().getClassLoader();
+		String fileDir = classLoader.getResource("files").getFile();
+		
+		listf(fileDir,fileFolderList );
 		System.out.println("Files :: "+fileFolderList);
 				
 		System.out.println();
 		System.out.println("List xml files -");
 		FilenameFilter filenameFilter = new OnlyExt("xml");
-		File directory = new File("H:/IMS PROJECT/Created Xmls");
+		
+		
+		File directory = new File(fileDir);
 		String[] arrayFiles = directory.list(filenameFilter);
 		System.out.print("Array of filepath :: ");
 		for (String s : arrayFiles) {
@@ -94,7 +106,7 @@ public class ListAllFilesFolders {
 		
 		System.out.println();
 		System.out.println("List exe files -");
-		List<File> listXmlFiles = listExeFiles("H:/software");
+		List<File> listXmlFiles = listExeFiles(fileDir);
 		System.out.println(listXmlFiles);
 		
 	}

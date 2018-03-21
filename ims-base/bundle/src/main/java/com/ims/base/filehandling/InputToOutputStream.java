@@ -18,16 +18,21 @@ public class InputToOutputStream {
 	 * The main method.
 	 *
 	 * @param args the arguments
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
-		String fileInput = "H:/IMS PROJECT/Created Xmls/Employee.xml";
-		String fileOutput = "H:/IMS PROJECT/Created Xmls/InputToOutput.xml";
+		String fileInput = "files/Employee.xml";
+		File fileOutput = File.createTempFile("InputToOutput", ".xml");
 		try {
-			convertInputToOutputStream(fileInput, fileOutput);
+			ClassLoader classLoader = new InputToOutputStream().getClass().getClassLoader();
+			String inputFileName = classLoader.getResource(fileInput).getFile();
+			
+			File inputFile = new File(inputFileName);
+			convertInputToOutputStream(inputFile, fileOutput);
 			FileInputStreamExample.readFileComplete(fileOutput);
 
-			convertInputToOutputStream2(fileInput, fileOutput);
+			convertInputToOutputStream2(inputFile, fileOutput);
 			FileInputStreamExample.readFileComplete(fileOutput);
 
 		} catch (IOException e) {
@@ -42,17 +47,19 @@ public class InputToOutputStream {
 	 * @param fileOutput the file output
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static void convertInputToOutputStream(String fileInput,
-			String fileOutput) throws IOException {
+	public static void convertInputToOutputStream(File fileInput,
+			File fileOutput) throws IOException {
 
 		System.out
 				.println("Begin convertInputToOutputStream(fileInput,fileOutput)");
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
 
+		//String outputFileName = classLoader.getResource(fileOutput).getFile();
+		
 		try {
-			inputStream = new FileInputStream(new File(fileInput));
-			outputStream = new FileOutputStream(new File(fileOutput));
+			inputStream = new FileInputStream(fileInput);
+			outputStream = new FileOutputStream(fileOutput);
 
 			byte[] bytes = new byte[20];
 			/**
@@ -87,16 +94,16 @@ public class InputToOutputStream {
 	 * @param fileOutput the file output
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static void convertInputToOutputStream2(String fileInput,
-			String fileOutput) throws IOException {
+	public static void convertInputToOutputStream2(File fileInput,
+			File fileOutput) throws IOException {
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
 		System.out
 				.println("Begin convertInputToOutputStream2(fileInput,fileOutput)");
 
 		try {
-			inputStream = new FileInputStream(new File(fileInput));
-			outputStream = new FileOutputStream(new File(fileOutput));
+			inputStream = new FileInputStream(fileInput);
+			outputStream = new FileOutputStream(fileOutput);
 
 			int size = inputStream.available();
 			byte b[] = new byte[size];

@@ -2,9 +2,7 @@ package com.ims.base.components.dom;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -29,7 +27,7 @@ public class DOMParserDemo {
 
 	public static void main(String[] args) throws Exception {
 		// Get the DOM Builder Factory
-		String xmlPath = "H:/IMS PROJECT/Employee.xml";
+		String xmlPath = "files/Employee.xml";
 		
 		System.out.println("Read XML ->");
 		List<Employee> empList = readXML(xmlPath);
@@ -80,9 +78,8 @@ public class DOMParserDemo {
 				
 			}
 		}
-		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-		String filePath = "H:/IMS PROJECT/Created Xmls/" + "XML" + timeStamp;
-		createXML(document , filePath);
+		
+		createXML(document);
 		
 	}
 
@@ -93,16 +90,21 @@ public class DOMParserDemo {
 	 * @throws TransformerFactoryConfigurationError
 	 * @throws TransformerConfigurationException
 	 * @throws TransformerException
+	 * @throws IOException 
 	 */
-	private static void createXML(Document document , String filePath)
+	private static void createXML(Document document)
 			throws TransformerFactoryConfigurationError,
-			TransformerConfigurationException, TransformerException {
+			TransformerConfigurationException, TransformerException, IOException {
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		DOMSource source = new DOMSource(document);
-		StreamResult result = new StreamResult(new File(filePath));
+		
+		File tempFile = File.createTempFile("Employee", ".xml");
+		System.out.format("Canonical filename: %s\n", tempFile.getCanonicalFile());
+		
+		StreamResult result = new StreamResult(tempFile);
 		transformer.transform(source, result);
- 
+		
 		System.out.println("File saved!");
 	}
 
@@ -186,7 +188,9 @@ public class DOMParserDemo {
 	 */
 	private static Document getDocument(String fileURL)
 			throws ParserConfigurationException, SAXException, IOException {
-		File fileurl = new File(fileURL);
+		ClassLoader classLoader = new DOMParserDemo().getClass().getClassLoader();
+		String fileName = classLoader.getResource(fileURL).getFile();
+		File fileurl = new File(fileName);
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
 		// Get the DOM Builder

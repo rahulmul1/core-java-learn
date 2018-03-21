@@ -23,7 +23,12 @@ public class TestSfySaxParser {
 		try {
 			SAXParser saxParser = saxParserFactory.newSAXParser();
 			SfySaxParser sfySaxParser = new SfySaxParser();
-			File fileURL = new File("H:/IMS PROJECT/AU_DESIGN_1.xml");
+			
+			ClassLoader classLoader = new TestSfySaxParser().getClass().getClassLoader();
+			String fileName = classLoader.getResource("files/AU_DESIGN_1.xml").getFile();
+			
+			File fileURL = new File(fileName);
+			
 			saxParser.parse(fileURL,sfySaxParser);
 
 			Country country = sfySaxParser.getCountry();

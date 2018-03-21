@@ -1,12 +1,14 @@
 package com.ims.base.components.sfy;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.apache.commons.lang.StringUtils;
 import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
-import org.apache.felix.scr.annotations.Property;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.ims.base.components.dom.TestSfyDomParser;
 
 /**
  * @author ragga7
@@ -25,7 +27,11 @@ public class SFYSchedulerService implements Runnable {
 
     public void run() {
     	String jsonJcrNodePath = StringUtils.EMPTY;
-    	jsonJcrNodePath = createNodeForSFYService.createNodesForSFY("D:/rahul/Richemonte/A_Desktop/SFY/AU_DESIGN_1.xml");
+    	
+    	ClassLoader classLoader = new TestSfyDomParser().getClass().getClassLoader();
+	String fileName = classLoader.getResource("files/AU_DESIGN_1.xml").getFile();
+		
+	jsonJcrNodePath = createNodeForSFYService.createNodesForSFY(fileName);
     	LOG.error("Executing a cron job (job#1) through the whiteboard pattern , Path of json --> " + jsonJcrNodePath);
     }
 

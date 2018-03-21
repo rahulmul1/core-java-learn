@@ -1,5 +1,6 @@
 package com.ims.base.serialization;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,6 +8,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.ims.base.interviewalgo.DistinctWordFromFile;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -25,7 +28,7 @@ import java.util.List;
 public class GetPersonDetails {
 
 	/** The Constant FILEPATH. */
-	public static final String FILEPATH = "H:/IMS PROJECT/Created Xmls/SerializedPerson.txt";
+	public static final String FILEPATH = "files/SerializedPerson.txt";
 
 	/**
 	 * The main method.
@@ -37,6 +40,12 @@ public class GetPersonDetails {
 		/**
 		 * Persists object by initializing using constructor.
 		 */
+		ClassLoader classLoader = new DistinctWordFromFile().getClass().getClassLoader();
+		String fileName = classLoader.getResource(FILEPATH).getFile();
+		
+		File file = new File(fileName);
+		
+		
 		Address address1 = new Address(52, "sector 4", "Gurgaon");
 		Address address2 = new Address(53, "sector 5", "Gurgaon");
 		
@@ -51,8 +60,8 @@ public class GetPersonDetails {
 		list.add(person2);
 		list.add(person3);
 
-		serializePerson(list);
-		deserializePerson();
+		serializePerson(list,file);
+		deserializePerson(file);
 
 		/**
 		 * Persists object by initializing one object thru setter.
@@ -71,8 +80,8 @@ public class GetPersonDetails {
 		list1.add(person5);
 		list1.add(person6);
 
-		serializePerson(list1);
-		deserializePerson();
+		serializePerson(list1,file);
+		deserializePerson(file);
 
 	}
 
@@ -80,12 +89,12 @@ public class GetPersonDetails {
 	 * Deserialize person.
 	 */
 	@SuppressWarnings("unchecked")
-	private static void deserializePerson() {
+	private static void deserializePerson(File file) {
 		List<PersonDetails> pDetails = null;
 		FileInputStream fileInputStream = null;
 		ObjectInputStream objectInputStream = null;
 		try {
-			fileInputStream = new FileInputStream(FILEPATH);
+			fileInputStream = new FileInputStream(file);
 			objectInputStream = new ObjectInputStream(fileInputStream);
 			pDetails = (ArrayList<PersonDetails>) objectInputStream
 					.readObject();
@@ -121,11 +130,11 @@ public class GetPersonDetails {
 	 * @param personList
 	 *            the person list
 	 */
-	private static void serializePerson(List<PersonDetails> personList) {
+	private static void serializePerson(List<PersonDetails> personList,File file) {
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
 		try {
-			fos = new FileOutputStream(FILEPATH);
+			fos = new FileOutputStream(file);
 			out = new ObjectOutputStream(fos);
 			out.writeObject(personList);
 			out.close();

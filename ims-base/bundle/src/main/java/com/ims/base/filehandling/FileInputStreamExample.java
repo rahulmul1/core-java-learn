@@ -1,5 +1,6 @@
 package com.ims.base.filehandling;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,9 +24,14 @@ public class FileInputStreamExample {
 	 */
 	public static void main(String args[]) throws Exception {
 
-		readFileComplete("H:/IMS PROJECT/Created Xmls/Employee.xml");
+		String filePath = "files/Employee.xml";
+		ClassLoader classLoader = new FileInputStreamExample().getClass().getClassLoader();
+		String fileName = classLoader.getResource(filePath).getFile();
+		File file = new File(fileName);
 		
-		readFileCompleteWithBytes("H:/IMS PROJECT/Created Xmls/Employee.xml");
+		readFileComplete(file);
+		
+		readFileCompleteWithBytes(fileName);
 		
 		allOperationFIS();
 		
@@ -37,13 +43,26 @@ public class FileInputStreamExample {
 		 * Char stream is able to read utf-8 file.
 		 * 
 		 */
-		readFileComplete("H:/IMS PROJECT/Created Xmls/utf8file.txt");
 		
-		readFileComplete("H:/IMS PROJECT/Created Xmls/notutf8file.txt");
+		String utf8FilePath = "files/utf8file.txt";
+		String notUtf8FilePath = "files/notutf8file.txt";
 		
-		FileReaderWriterExample.readFileComplete("H:/IMS PROJECT/Created Xmls/utf8file.txt");
 		
-		FileReaderWriterExample.readFileComplete("H:/IMS PROJECT/Created Xmls/notutf8file.txt");
+		String utf8FileName = classLoader.getResource(utf8FilePath).getFile();
+		File utf8File = new File(utf8FileName);
+		
+		String notUtf8FileName = classLoader.getResource(notUtf8FilePath).getFile();
+		File notUtf8File = new File(notUtf8FileName);
+		
+		
+		readFileComplete(utf8File);
+		
+		readFileComplete(notUtf8File);
+		
+		
+		FileReaderWriterExample.readFileComplete(utf8File);
+		
+		FileReaderWriterExample.readFileComplete(notUtf8File);
 		
 		/**
 		 * 
@@ -51,9 +70,15 @@ public class FileInputStreamExample {
 		 * of reading the docx file through byte stream. docx cant be read thru char stream.
 		 * 
 		 */
-		readFileComplete("H:/IMS PROJECT/Created Xmls/ReadWithByteStream.docx");
 		
-		FileReaderWriterExample.readFileComplete("H:/IMS PROJECT/Created Xmls/ReadWithByteStream.docx");
+		String readWithByteStreamPath = "files/ReadWithByteStream.docx";
+		
+		String readWithByteStreamFileName = classLoader.getResource(readWithByteStreamPath).getFile();
+		File readWithByteStreamFile = new File(readWithByteStreamFileName);
+		
+		readFileComplete(readWithByteStreamFile);
+		
+		FileReaderWriterExample.readFileComplete(readWithByteStreamFile);
 	}
 
 	/**
@@ -72,8 +97,13 @@ public class FileInputStreamExample {
 		System.out.println("Begin allOperationFIS()");
 		
 		int size;
+		
+		ClassLoader classLoader = new FileInputStreamExample().getClass().getClassLoader();
+		String fileName = classLoader.getResource("files/Employee.xml").getFile();
+		
+		
 		InputStream f = new FileInputStream(
-				"H:/IMS PROJECT/Created Xmls/Employee.xml");
+				fileName);
 
 		System.out.println("Inside Main");
 		System.out.println("Total Available Bytes: " + (size = f.available()));
@@ -121,11 +151,12 @@ public class FileInputStreamExample {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	public static void readFileComplete(String path) throws IOException {
+	public static void readFileComplete(File fileName) throws IOException {
 		
 		System.out.println("Begin readFileComplete(String path)");
+		System.out.format("Canonical filename: %s\n", fileName.getCanonicalFile());
 		
-		InputStream is = new FileInputStream(path);
+		InputStream is = new FileInputStream(fileName);
 		int content = is.read();
 		while (content != -1) {
 			System.out.print((char) content);
@@ -144,11 +175,11 @@ public class FileInputStreamExample {
 	 * @param path the path
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static void readFileCompleteWithBytes(String path) throws IOException {
+	public static void readFileCompleteWithBytes(String fileName) throws IOException {
 		
 		System.out.println("Begin readFileCompleteWithBytes(String path)");
 		
-		InputStream is = new FileInputStream(path);
+		InputStream is = new FileInputStream(fileName);
 		int available = is.available();
 		System.out.println("Available Bytes in file ->" + available);
 		byte b[] = new byte[available];

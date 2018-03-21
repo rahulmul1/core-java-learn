@@ -17,7 +17,11 @@ public class TextSaxParserDemo {
 		try {
 			SAXParser saxParser = saxParserFactory.newSAXParser();
 			SaxParserDemo saxParserDemo = new SaxParserDemo();
-			saxParser.parse(new File("H:/IMS PROJECT/Employee_SAX.xml"),
+			
+			ClassLoader classLoader = new TextSaxParserDemo().getClass().getClassLoader();
+			String fileName = classLoader.getResource("files/Employee_SAX.xml").getFile();
+				
+			saxParser.parse(new File(fileName),
 					saxParserDemo);
 			// Get Employees list
 			List<Employee> empList = saxParserDemo.getEmpList();

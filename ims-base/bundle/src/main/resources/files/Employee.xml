@@ -1,0 +1,17 @@
+<employees>
+  <employee id="1">
+    <firstName>Rakesh</firstName>
+    <lastName>Mishra</lastName>
+    <location>Bangalore</location>
+  </employee>
+  <employee id="2">
+    <firstName>John</firstName>
+    <lastName>Davis</lastName>
+    <location>Chennai</location>
+  </employee>
+  <employee id="3">
+    <firstName>Rajesh</firstName>
+    <lastName>Sharma</lastName>
+    <location>Pune</location>
+  </employee>
+</employees>

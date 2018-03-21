@@ -14,16 +14,16 @@ public class FileOutputStreamExample {
 	 * 
 	 * @param args
 	 *            the arguments
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		String content = "This is the text content1";
-		String outputFile = "H:/IMS PROJECT/Created Xmls/FOS.xml";
-
-		writeStringToFile(content, outputFile);
+		File tempFile = File.createTempFile("FOS", ".xml");
+		writeStringToFile(content, tempFile);
 		
 		try {
-			FileInputStreamExample.readFileComplete(outputFile);
+			FileInputStreamExample.readFileComplete(tempFile);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,12 +41,10 @@ public class FileOutputStreamExample {
 	 * @param outputFile
 	 *            the output file
 	 */
-	public static void writeStringToFile(String content, String outputFile) {
-		File file;
+	public static void writeStringToFile(String content, File file) {
 		FileOutputStream fop = null;
 		try {
 
-			file = new File(outputFile);
 			fop = new FileOutputStream(file);
 
 			// if file doesnt exists, then create it

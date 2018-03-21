@@ -19,7 +19,11 @@ public class DistinctWordFromFile {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		File file = new File("H:/IMS PROJECT/Created Xmls/MaxDuplicatesInFile.txt");
+		
+		ClassLoader classLoader = new DistinctWordFromFile().getClass().getClassLoader();
+		String fileDir = classLoader.getResource("files/MaxDuplicatesInFile.txt").getFile();
+		
+		File file = new File(fileDir);
 		InputStream is = new FileInputStream(file);
 		BufferedInputStream bis = new BufferedInputStream(is);
 		try {

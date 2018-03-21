@@ -29,12 +29,13 @@ public class FileReaderWriterExample {
 				+ " and pay their due taxes.";
 		try {
 
+			File tempFile = File.createTempFile("FileWriter", ".xml");
 			writeFileComplete(content,
-					"H:/IMS PROJECT/Created Xmls/FileWriter.xml");
+					tempFile);
 
-			readFileComplete("H:/IMS PROJECT/Created Xmls/FileWriter.xml");
+			readFileComplete(tempFile);
 			
-			readFileComplete("H:/IMS PROJECT/Created Xmls/utf8file.txt");
+			//readFileComplete("H:/IMS PROJECT/Created Xmls/utf8file.txt");
 		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -51,10 +52,10 @@ public class FileReaderWriterExample {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	public static String readFileComplete(String filePath) throws IOException {
+	public static String readFileComplete(File file) throws IOException {
 		System.out.println("FileRead Start");
 		
-		Reader fr = new FileReader(new File(filePath));
+		Reader fr = new FileReader(file);
 		Reader br = new BufferedReader(fr);
 		String string = StringUtils.EMPTY;
 		try {
@@ -82,11 +83,11 @@ public class FileReaderWriterExample {
 	 * @param outputFilePath the output file path
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static void writeFileComplete(String content, String outputFilePath)
+	public static void writeFileComplete(String content, File outputFile)
 			throws IOException {
 		System.out.println("FileWrite Start");
 
-		Writer fw = new FileWriter(new File(outputFilePath));
+		Writer fw = new FileWriter(outputFile);
 		Writer bfw = null;
 		try {
 			bfw = new BufferedWriter(fw);

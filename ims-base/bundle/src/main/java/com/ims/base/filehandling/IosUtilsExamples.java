@@ -15,7 +15,12 @@ public class IosUtilsExamples {
 		InputStream is = null;
 		File file = null;
 		try{
-			file = new File("H:/IMS PROJECT/Employee.xml");
+			
+			ClassLoader classLoader = new IosUtilsExamples().getClass().getClassLoader();
+			String fileName = classLoader.getResource("files/Employee.xml").getFile();
+			
+			
+			file = new File(fileName);
 			is = new FileInputStream(file);
 			String string = IOUtils.toString(is);
 			System.out.println(string);

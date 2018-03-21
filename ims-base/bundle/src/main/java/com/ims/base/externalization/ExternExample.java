@@ -13,8 +13,7 @@ import java.io.*;
 public class ExternExample {
    
 	/** The Constant FILEPATH. */
-	public static final String FILEPATH = "H:/IMS PROJECT/Created Xmls/ExternalizeCar.txt";
-    
+	
     /**
      * The main method.
      *
@@ -27,10 +26,15 @@ public class ExternExample {
 	
 	Car newCar = null;
 	
+	File tempFile = null;
+    
 	//serialize the car
 	try {
-	    FileOutputStream fo = new FileOutputStream(FILEPATH);
+		tempFile = File.createTempFile("ExternalizeCar", ".txt");
+		FileOutputStream fo = new FileOutputStream(tempFile);
 	    ObjectOutputStream so = new ObjectOutputStream(fo);
+	    System.out.format("Canonical filename: %s\n", tempFile.getCanonicalFile());
+		
 	    so.writeObject(car);
 	    so.flush();
 	    so.close();
@@ -41,10 +45,12 @@ public class ExternExample {
 
 	// de-serialize the Car
 	try {
-	    FileInputStream fi = new FileInputStream(FILEPATH);
-	    ObjectInputStream si = new ObjectInputStream(fi);  	    
-	    newCar = (Car) si.readObject();
-	    si.close();
+		if(tempFile!=null) {
+			FileInputStream fi = new FileInputStream(tempFile);
+		    ObjectInputStream si = new ObjectInputStream(fi);  	    
+		    newCar = (Car) si.readObject();
+		    si.close();
+		}
 	}
 	catch (Exception e) {
 	    System.out.println(e);
