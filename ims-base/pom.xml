@@ -111,6 +111,10 @@
             <url>http://repo.adobe.com/nexus/content/groups/public/</url>
             <layout>default</layout>
         </repository>
+        <repository>
+		    <id>xuggle repo</id>
+		    <url>https://files.liferay.com/mirrors/xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
+		</repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>

@@ -176,6 +176,13 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 			    <artifactId>ffmpeg</artifactId>
 			    <version>3.4.1-1.4</version>
 			</dependency>
+			<!-- https://mvnrepository.com/artifact/xuggle/xuggle-xuggler -->
+			<dependency>
+			    <groupId>xuggle</groupId>
+			    <artifactId>xuggle-xuggler</artifactId>
+			    <version>5.4</version>
+			</dependency>
+			
 			
     </dependencies>
     
